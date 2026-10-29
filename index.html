@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="id" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jelajahi pesona Liburan Manise — destinasi wisata premium Pulau Ambon dan sekitarnya. Pantai, sejarah, budaya, dan keindahan bahari Indonesia Timur.">
+  <meta name="theme-color" content="#0d9488">
+  <title>Liburan Manise — Kepingan Surga di Timur Indonesia</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="tailwind.config.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-[#fffdf8] dark:bg-[#111827] text-slate-800 dark:text-slate-200 antialiased">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NAVBAR
+       ═══════════════════════════════════════════════════════════ -->
+  <nav id="navbar" class="navbar fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        
+        <!-- Logo -->
+        <a href="#hero" class="flex items-center gap-2.5 group">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <span class="text-lg font-bold text-white navbar-scrolled-text transition-colors">
+            Liburan <span class="text-teal-400">Manise</span>
+          </span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden md:flex items-center gap-2">
+          <a href="#hero" class="px-3 py-2 text-sm font-medium text-white/80 hover:text-white navbar-scrolled-link rounded-lg hover:bg-white/10 transition-all">Beranda</a>
+          <a href="#destinations" class="px-3 py-2 text-sm font-medium text-white/80 hover:text-white navbar-scrolled-link rounded-lg hover:bg-white/10 transition-all">Destinasi</a>
+          <a href="#about" class="px-3 py-2 text-sm font-medium text-white/80 hover:text-white navbar-scrolled-link rounded-lg hover:bg-white/10 transition-all">Tentang</a>
+          
+          <div class="w-px h-6 bg-white/20 mx-1"></div>
+
+          <!-- Ambon Live Info (Jam WIT, Cuaca, Gelombang) -->
+          <button id="ambon-live-btn" class="ambon-live-pill flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer group" title="Klik untuk lihat detail kondisi cuaca & maritim Ambon" aria-label="Lihat kondisi cuaca dan gelombang Ambon">
+            <!-- Jam WIT -->
+            <div class="flex items-center gap-1.5 font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="nav-live-time">--:-- WIT</span>
+            </div>
+            <span class="opacity-35">|</span>
+            <!-- Cuaca -->
+            <div class="flex items-center gap-1">
+              <span id="nav-weather-icon">⛅</span>
+              <span id="nav-weather-temp">--°C</span>
+            </div>
+            <span class="opacity-35">|</span>
+            <!-- Gelombang -->
+            <div class="flex items-center gap-1 font-medium text-teal-300 dark:text-teal-400 group-hover:scale-105 transition-transform">
+              <span>🌊</span>
+              <span id="nav-wave-status">Gel. --m</span>
+            </div>
+          </button>
+          
+          <div class="w-px h-6 bg-white/20 mx-1"></div>
+          
+          <!-- Dark Mode Toggle -->
+          <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle Dark Mode">
+            <div class="toggle-knob">
+              <!-- Sun Icon -->
+              <svg class="icon-sun" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+              </svg>
+              <!-- Moon Icon -->
+              <svg class="icon-moon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+              </svg>
+            </div>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle & Mobile Weather Pill -->
+        <div class="flex items-center gap-2 md:hidden">
+          <button id="ambon-live-btn-mobile" class="ambon-live-pill-mobile flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium" aria-label="Lihat kondisi cuaca dan gelombang Ambon">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="nav-live-time-mobile">--:-- WIT</span>
+            <span id="nav-weather-icon-mobile">⛅</span>
+            <span id="nav-weather-temp-mobile">--°C</span>
+          </button>
+
+          <button id="dark-mode-toggle-mobile" class="dark-mode-toggle" aria-label="Ganti tema">
+            <div class="toggle-knob">
+              <svg class="icon-sun" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+              </svg>
+              <svg class="icon-moon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+              </svg>
+            </div>
+          </button>
+          <button id="mobile-menu-toggle" class="w-10 h-10 rounded-xl flex items-center justify-center text-white hover:bg-white/10 transition-colors" aria-label="Menu" aria-expanded="false">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="mobile-menu fixed inset-0 z-[60] bg-white dark:bg-gray-900 md:hidden">
+    <div class="flex flex-col h-full">
+      <div class="flex items-center justify-between px-4 h-16 border-b border-slate-100 dark:border-gray-800">
+        <span class="text-lg font-bold text-slate-800 dark:text-white">
+          Liburan <span class="text-teal-500">Manise</span>
+        </span>
+        <button id="mobile-menu-close" class="w-10 h-10 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors" aria-label="Tutup menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Ambon Weather & Wave Card -->
+      <div class="px-6 pt-5">
+        <button id="ambon-live-btn-drawer" class="w-full text-left p-4 rounded-2xl bg-gradient-to-r from-teal-500/10 via-cyan-500/10 to-blue-500/10 border border-teal-500/20 dark:border-teal-400/20 flex items-center justify-between group">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="text-xs font-semibold text-teal-700 dark:text-teal-300">Live Ambon (WIT)</span>
+            </div>
+            <div class="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
+              <span id="drawer-live-time">--:-- WIT</span>
+              <span class="text-slate-300 dark:text-slate-600">•</span>
+              <span id="drawer-weather-temp">--°C</span>
+              <span id="drawer-weather-icon">⛅</span>
+            </div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 flex items-center gap-1.5">
+              <span>🌊 Gelombang: <strong id="drawer-wave-status" class="text-teal-600 dark:text-teal-400 font-semibold">--m</strong></span>
+            </div>
+          </div>
+          <span class="text-xs font-semibold text-teal-600 dark:text-teal-400 group-hover:translate-x-1 transition-transform">
+            Detail ↗
+          </span>
+        </button>
+      </div>
+
+      <div class="flex-1 flex flex-col justify-center items-center gap-6 px-8">
+        <a href="#hero" class="text-2xl font-semibold text-slate-800 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Beranda</a>
+        <a href="#destinations" class="text-2xl font-semibold text-slate-800 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Destinasi</a>
+        <a href="#about" class="text-2xl font-semibold text-slate-800 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Tentang</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO SECTION
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="hero" class="hero-section">
+    <!-- Background (diisi oleh JS dari data.js) -->
+    <div id="hero-bg" class="hero-bg">
+      <img
+        id="hero-image"
+        src="assets/images/hero.jpg"
+        alt="Pesona Liburan Manise"
+        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80';"
+        class="w-full h-full object-cover"
+        fetchpriority="high"
+        decoding="async">
+    </div>
+    <div class="hero-overlay"></div>
+
+    <!-- Hero Content -->
+    <div class="hero-content text-center px-4 sm:px-6 max-w-4xl mx-auto">
+      <!-- Kecil label -->
+      <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 mb-6">
+        <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+        <span class="text-xs font-medium text-white/90 tracking-wide uppercase">Maluku, Indonesia</span>
+      </div>
+
+      <!-- Title -->
+      <h1 id="hero-title" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-5 drop-shadow-lg">
+        Kepingan Surga di Timur Indonesia
+      </h1>
+
+      <!-- Subtitle -->
+      <p id="hero-subtitle" class="text-base sm:text-lg md:text-xl text-white/85 max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow">
+        Jelajahi pesona Liburan Manise — dari pantai berpasir mutiara hingga benteng bersejarah ratusan tahun
+      </p>
+
+      <!-- Floating Search Bar -->
+      <div class="search-float max-w-xl mx-auto rounded-2xl px-5 py-3 flex items-center gap-3">
+        <svg class="w-5 h-5 text-white/60 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input id="hero-search-input" 
+               type="text" 
+               placeholder="Cari destinasi impianmu... (misal: Pantai Ora, Benteng, Budaya)" 
+               class="w-full text-sm md:text-base outline-none placeholder:text-white/50"
+               autocomplete="off">
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="mt-14 flex flex-col items-center gap-2 animate-bounce">
+        <span class="text-xs text-white/50 tracking-widest uppercase">Gulir ke bawah</span>
+        <svg class="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </div>
+    </div>
+
+    <a href="https://commons.wikimedia.org/wiki/File:Pantai_Liang,_Maluku.jpg"
+       target="_blank" rel="noopener noreferrer"
+       class="absolute bottom-12 left-4 z-[4] rounded bg-black/50 px-2 py-1 text-[10px] text-white/80 underline hover:text-white">
+    </a>
+
+    <!-- Marquee -->
+    <div class="marquee-wrapper absolute bottom-0 left-0 right-0 py-3 bg-gradient-to-r from-black/40 via-black/20 to-black/40 z-[3]">
+      <div id="marquee-track" class="marquee-track">
+        <!-- Diisi oleh JS -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       DESTINASI WISATA
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="destinations" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-12 fade-in">
+        <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-teal-600 dark:text-teal-400 mb-3">Destinasi Pilihan</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 dark:text-white mb-4">
+          Pesona Maluku yang Tak Terlupakan
+        </h2>
+        <p class="text-slate-500 dark:text-slate-400 leading-relaxed">
+          Dari pantai berpasir putih yang pernah dinobatkan terbaik di dunia, hingga benteng peninggalan zaman rempah-rempah — setiap sudut Maluku menyimpan cerita.
+        </p>
+      </div>
+
+      <!-- Filter, Search, Sort & View Controls Toolbar -->
+      <div class="space-y-4 mb-10 fade-in">
+        <!-- Row 1: Filters & Search -->
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <!-- Filter Categories -->
+          <div id="filter-container" class="flex flex-wrap items-center gap-2">
+            <!-- Tombol filter di-render oleh JS -->
+          </div>
+
+          <!-- Search Input -->
+          <div class="relative w-full lg:w-72">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input id="dest-search-input" 
+                   type="text" 
+                   placeholder="Cari tempat wisata..."
+                   class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 
+                          text-sm text-slate-700 dark:text-slate-200 placeholder:text-slate-400 
+                          focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 
+                          transition-all duration-300"
+                   autocomplete="off">
+          </div>
+        </div>
+
+        <!-- Row 2: Sub-toolbar with Result Count, Sort & View Mode Switcher -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-200/70 dark:border-gray-800 text-xs">
+          <!-- Counter -->
+          <div class="text-slate-500 dark:text-slate-400 flex items-center gap-2 font-medium">
+            <span>Menampilkan <strong id="dest-count" class="text-teal-600 dark:text-teal-400 font-bold">12</strong> destinasi</span>
+            <span id="active-filter-badge" class="hidden sm:inline-block px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 text-[11px] font-semibold">Semua</span>
+          </div>
+
+          <!-- Controls: Sort & Layout Toggles -->
+          <div class="flex items-center gap-3 ml-auto">
+            <!-- Sort dropdown -->
+            <div class="flex items-center gap-1.5">
+              <label for="sort-select" class="text-slate-400 dark:text-slate-500 hidden sm:inline">Urutkan:</label>
+              <select id="sort-select" class="px-2.5 py-1.5 rounded-lg bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-slate-700 dark:text-slate-200 focus:outline-none focus:border-teal-500 cursor-pointer text-xs" aria-label="Urutkan destinasi">
+                <option value="default">Pilihan Editor</option>
+                <option value="name-asc">Nama (A - Z)</option>
+                <option value="name-desc">Nama (Z - A)</option>
+              </select>
+            </div>
+
+            <div class="w-px h-5 bg-slate-200 dark:bg-gray-700"></div>
+
+            <!-- View Switcher -->
+            <div class="flex items-center bg-slate-100 dark:bg-gray-800/90 p-1 rounded-xl gap-1" role="group" aria-label="Ganti Tampilan Katalog">
+              <button id="view-btn-grid" class="view-btn active flex items-center gap-1.5" data-view="grid" title="Tampilan Grid Kartu" aria-label="Tampilan Grid">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                </svg>
+                <span class="hidden sm:inline">Grid</span>
+              </button>
+              <button id="view-btn-list" class="view-btn flex items-center gap-1.5" data-view="list" title="Tampilan Daftar Rinci" aria-label="Tampilan Daftar">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <span class="hidden sm:inline">Daftar</span>
+              </button>
+              <button id="view-btn-compact" class="view-btn flex items-center gap-1.5" data-view="compact" title="Tampilan Kompak Ringkas" aria-label="Tampilan Kompak">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h7v7H3V4zm11 0h7v7h-7V4zM3 13h7v7H3v-7zm11 0h7v7h-7v-7z"/>
+                </svg>
+                <span class="hidden sm:inline">Kompak</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Destination Grid -->
+      <div id="destination-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Kartu destinasi di-render oleh JS -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TENTANG WEBSITE
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="about" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800/50">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-14 fade-in">
+        <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-teal-600 dark:text-teal-400 mb-3">Tentang</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 dark:text-white mb-4">
+          Tentang Website Ini
+        </h2>
+        <p class="text-slate-500 dark:text-slate-400 leading-relaxed">
+          Mengenal lebih dekat misi kami dalam mempromosikan keindahan Pulau Ambon dan Wisata unggulan disekitarnya ke seluruh dunia.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Website Description -->
+        <div class="md:col-span-2 about-card bg-[#F9FAFB] dark:bg-gray-800 rounded-2xl p-8 border border-slate-100 dark:border-gray-700/50 fade-in-left">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 dark:text-white">Misi Kami</h3>
+          </div>
+          <div id="about-description" class="text-slate-600 dark:text-slate-300 leading-relaxed">
+            <!-- Diisi oleh JS dari aboutConfig -->
+          </div>
+        </div>
+
+        <!-- Developer Profile -->
+        <div class="about-card bg-[#F9FAFB] dark:bg-gray-800 rounded-2xl p-8 border border-slate-100 dark:border-gray-700/50 text-center fade-in-right">
+          <div class="w-24 h-24 rounded-full overflow-hidden mx-auto mb-5 ring-4 ring-teal-100 dark:ring-teal-900/50">
+            <img id="dev-photo" src="" alt="Developer" class="w-full h-full object-cover">
+          </div>
+          <h4 id="dev-name" class="text-lg font-bold text-slate-800 dark:text-white mb-1"></h4>
+          <p id="dev-role" class="text-sm text-teal-600 dark:text-teal-400 font-medium mb-3"></p>
+          <p id="dev-bio" class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-5"></p>
+          
+          <!-- Email Contact -->
+          <div class="flex items-center justify-center">
+            <a id="dev-email" href="mailto:rafael@example.com" 
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-sm font-semibold transition-all group" 
+               aria-label="Email Pengembang">
+              <svg class="w-4 h-4 text-teal-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <span id="dev-email-text">rafael@example.com</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Section -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 fade-in">
+        <div class="text-center p-6 rounded-2xl bg-[#F9FAFB] dark:bg-gray-800 border border-slate-100 dark:border-gray-700/50">
+          <div class="text-3xl font-extrabold text-teal-600 dark:text-teal-400 mb-1">12+</div>
+          <div class="text-sm text-slate-500 dark:text-slate-400">Destinasi Wisata</div>
+        </div>
+        <div class="text-center p-6 rounded-2xl bg-[#F9FAFB] dark:bg-gray-800 border border-slate-100 dark:border-gray-700/50">
+          <div class="text-3xl font-extrabold text-teal-600 dark:text-teal-400 mb-1">5</div>
+          <div class="text-sm text-slate-500 dark:text-slate-400">Kategori</div>
+        </div>
+        <div class="text-center p-6 rounded-2xl bg-[#F9FAFB] dark:bg-gray-800 border border-slate-100 dark:border-gray-700/50">
+          <div class="text-3xl font-extrabold text-teal-600 dark:text-teal-400 mb-1">1000+</div>
+          <div class="text-sm text-slate-500 dark:text-slate-400">Pulau di Maluku</div>
+        </div>
+        <div class="text-center p-6 rounded-2xl bg-[#F9FAFB] dark:bg-gray-800 border border-slate-100 dark:border-gray-700/50">
+          <div class="text-3xl font-extrabold text-teal-600 dark:text-teal-400 mb-1">&infin;</div>
+          <div class="text-sm text-slate-500 dark:text-slate-400">Kenangan Indah</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ -->
+  <footer class="bg-slate-900 dark:bg-black text-slate-400 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8 mb-10">
+        <!-- Brand -->
+        <div>
+          <div class="flex items-center gap-2.5 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <span class="text-lg font-bold text-white">Liburan <span class="text-teal-400">Manise</span></span>
+          </div>
+          <p class="text-sm leading-relaxed max-w-xs">
+            Menyajikan keindahan alam, kekayaan budaya, dan warisan sejarah Kepulauan Maluku untuk dunia.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-white font-semibold mb-4">Navigasi</h4>
+          <ul class="space-y-2">
+            <li><a href="#hero" class="text-sm hover:text-teal-400 transition-colors">Beranda</a></li>
+            <li><a href="#destinations" class="text-sm hover:text-teal-400 transition-colors">Destinasi</a></li>
+            <li><a href="#about" class="text-sm hover:text-teal-400 transition-colors">Tentang</a></li>
+          </ul>
+        </div>
+
+        <!-- Kategori -->
+        <div>
+          <h4 class="text-white font-semibold mb-4">Kategori Wisata</h4>
+          <ul class="space-y-2">
+            <li><span class="text-sm">🏖️ Bahari & Pantai</span></li>
+            <li><span class="text-sm">🌿 Alam & Ekowisata</span></li>
+            <li><span class="text-sm">🏛️ Sejarah & Heritage</span></li>
+            <li><span class="text-sm">🎭 Budaya & Tradisi</span></li>
+            <li><span class="text-sm">🌉 Ikon Kota</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-slate-500">
+          &copy; 2026 Liburan Manise. Dibuat untuk mempromosikan pariwisata Maluku.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MODAL OVERLAY (Detail Destinasi)
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Detail Destinasi">
+    <div id="modal-container" class="modal-container">
+      <!-- Konten modal di-render oleh JS -->
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       WEATHER & MARITIME MODAL (Ambon Real-Time)
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="weather-modal" class="weather-modal-overlay" role="dialog" aria-modal="true" aria-label="Kondisi Cuaca & Maritim Ambon">
+    <div class="weather-modal-container p-6 md:p-8">
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between pb-4 border-b border-slate-100 dark:border-gray-800 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center text-white text-2xl shadow-md">
+            🌊
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-xl font-bold text-slate-800 dark:text-white">Maritim & Cuaca Ambon</h3>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Live WIT
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Pulau Ambon & Teluk Ambon, Maluku (UTC+9)</p>
+          </div>
+        </div>
+        <button id="weather-modal-close" class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors" aria-label="Tutup modal cuaca">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Live Clock & Date Banner -->
+      <div class="bg-gradient-to-br from-teal-600 to-cyan-700 rounded-2xl p-5 text-white mb-6 relative overflow-hidden shadow-lg shadow-teal-700/20">
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 relative z-10">
+          <div>
+            <div class="text-xs font-medium text-teal-100 tracking-wider uppercase mb-1">Waktu Saat Ini di Ambon</div>
+            <div id="modal-live-clock" class="text-3xl sm:text-4xl font-extrabold tracking-tight font-mono">--:--:-- WIT</div>
+            <div id="modal-live-date" class="text-xs text-teal-100 mt-1">Memuat tanggal...</div>
+          </div>
+          <div class="bg-white/15 backdrop-blur-md rounded-xl p-3 border border-white/20 text-center sm:text-right">
+            <div class="text-xs text-teal-100">Zona Waktu</div>
+            <div class="font-bold text-sm">WIT (Waktu Indonesia Timur)</div>
+            <div class="text-[11px] text-teal-200">UTC +9:00 (Maluku)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid 2 Kolom: Cuaca & Gelombang Laut -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        <!-- Card 1: Cuaca Darat -->
+        <div class="bg-slate-50 dark:bg-gray-800/70 rounded-2xl p-5 border border-slate-100 dark:border-gray-700/60">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Cuaca Hari Ini</span>
+            <span id="modal-weather-icon" class="text-2xl">⛅</span>
+          </div>
+          <div class="flex items-baseline gap-2 mb-2">
+            <span id="modal-weather-temp" class="text-3xl font-extrabold text-slate-800 dark:text-white">--°C</span>
+            <span id="modal-weather-desc" class="text-sm font-semibold text-teal-600 dark:text-teal-400">Memuat cuaca...</span>
+          </div>
+          <div class="space-y-1.5 pt-3 border-t border-slate-200/60 dark:border-gray-700/60 text-xs text-slate-600 dark:text-slate-300">
+            <div class="flex justify-between">
+              <span class="text-slate-400">Kelembaban</span>
+              <span id="modal-weather-humidity" class="font-semibold">--%</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-400">Kecepatan Angin</span>
+              <span id="modal-weather-wind" class="font-semibold">-- km/jam</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-400">Suhu Terasa</span>
+              <span id="modal-weather-feels" class="font-semibold">--°C</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Kondisi Gelombang Laut -->
+        <div class="bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-gray-800/90 dark:to-cyan-950/30 rounded-2xl p-5 border border-cyan-100 dark:border-cyan-900/40">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-cyan-800 dark:text-cyan-400 uppercase tracking-wider">Kondisi Gelombang</span>
+            <span class="text-2xl animate-pulse">🌊</span>
+          </div>
+          <div class="flex items-baseline gap-2 mb-2">
+            <span id="modal-wave-height" class="text-3xl font-extrabold text-cyan-900 dark:text-cyan-200">-- m</span>
+            <span id="modal-wave-category" class="text-xs font-bold px-2 py-0.5 rounded-full bg-cyan-200/70 dark:bg-cyan-900/60 text-cyan-900 dark:text-cyan-200">Memuat...</span>
+          </div>
+          <div class="space-y-1.5 pt-3 border-t border-cyan-200/60 dark:border-gray-700/60 text-xs text-slate-600 dark:text-slate-300">
+            <div class="flex justify-between">
+              <span class="text-slate-400">Periode Ombak</span>
+              <span id="modal-wave-period" class="font-semibold">-- detik</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-400">Arah Ombak</span>
+              <span id="modal-wave-direction" class="font-semibold">--</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-400">Status Perairan</span>
+              <span id="modal-wave-safety" class="font-semibold text-emerald-600 dark:text-emerald-400">Tenang & Kondusif</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rekomendasi Bahari & Pelayaran -->
+      <div class="bg-teal-50/80 dark:bg-teal-950/20 border border-teal-200/70 dark:border-teal-800/40 rounded-2xl p-4 mb-6">
+        <h4 class="text-xs font-bold text-teal-800 dark:text-teal-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Panduan Wisata Bahari Hari Ini
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+          <div class="p-2.5 rounded-xl bg-white/70 dark:bg-gray-800/70 border border-teal-100 dark:border-teal-900/30">
+            <div class="font-semibold text-slate-700 dark:text-slate-200 mb-0.5">🚤 Speedboat / Feri</div>
+            <p id="guide-ferry" class="text-slate-500 dark:text-slate-400 text-[11px]">Sangat aman untuk penyeberangan ke Saparua / Seram.</p>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white/70 dark:bg-gray-800/70 border border-teal-100 dark:border-teal-900/30">
+            <div class="font-semibold text-slate-700 dark:text-slate-200 mb-0.5">🤿 Snorkeling & Diving</div>
+            <p id="guide-diving" class="text-slate-500 dark:text-slate-400 text-[11px]">Kondisi air jernih di Pantai Liang & Pulau Pombo.</p>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white/70 dark:bg-gray-800/70 border border-teal-100 dark:border-teal-900/30">
+            <div class="font-semibold text-slate-700 dark:text-slate-200 mb-0.5">🏖️ Berenang & Pantai</div>
+            <p id="guide-swimming" class="text-slate-500 dark:text-slate-400 text-[11px]">Ombak pesisir bersahabat untuk wisata keluarga.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer & Refresh -->
+      <div class="flex items-center justify-between text-xs text-slate-400 dark:text-slate-500 pt-3 border-t border-slate-100 dark:border-gray-800">
+        <span id="weather-last-updated">Diperbarui: baru saja</span>
+        <button id="btn-refresh-weather" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-slate-700 dark:text-slate-200 font-medium transition-colors cursor-pointer" aria-label="Perbarui data cuaca">
+          <svg id="refresh-icon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Segarkan Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       BACK TO TOP BUTTON
+       ═══════════════════════════════════════════════════════════ -->
+  <button id="back-to-top" class="back-to-top" aria-label="Kembali ke atas">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+  </button>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCRIPTS
+       ═══════════════════════════════════════════════════════════ -->
+  <!-- Data terpisah — edit file ini untuk mengubah konten -->
+  <script src="data.js"></script>
+  <!-- Logika aplikasi -->
+  <script src="app.js"></script>
+
+</body>
+</html>
